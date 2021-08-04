@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -34,40 +34,39 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="jumbotron jumbotron-fluid mt-3 py-4" id="productH2Count">
-                        <h1 class="h1 text-center text-primary">Votre Panier</h1>
-                        <!--h2 creer en JS-->
+                    <div id="TitrePage">
+                        <h1 class="text-center">Votre Panier</h1>
+                        
                     </div>
                 </div>
             </div>
         <div class="row justify-content-center">
             
-            <div class="col-12 col-md-10 mb-3">
-                <div class="card mb-4 mb-lg-0 border-primary shadow">
-                    <div class="card-body" id="productBasketList">
+            <div class="box_panier_entier">
+                
+                    <div  id="productBasketList">
                         
                     </div>
-                    <div class="card-footer pt-0" id="productBasketTotal">
+                    
+                    <div id="productBasketTotal">
                         
+                    
                     </div>
-                </div>
             </div>
         </div>
-        <div class="modal fade" id="EmptyBasket" tabindex="-1" aria-labelledby="ViderPanier" aria-hidden="true">
+        <div class="modal fade" id="EmptyBasket">
             <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content border-danger">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title text-danger h5">Confirmation</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h3>Confirmation</h3>
+                        
                     </div>
                     <div class="modal-body">
                         Êtes-vous sur de vouloir vider votre panier ?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                        <button type="button" class="btn btn-danger" id="ConfirmDeleteBasket">Vider le panier</button>
+                        <button type="button"  data-dismiss="modal">Annuler</button>
+                        <button type="button"  id="ConfirmDeleteBasket">Vider le panier</button>
                     </div>
                 </div>
             </div>
@@ -77,9 +76,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title h5">Formulaire de commande</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <button type="button"  data-dismiss="modal">Annuler</button>
                     </div>
                     <form class="needs-validation">
                         <div class="modal-body align-items-center">

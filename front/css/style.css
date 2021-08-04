@@ -114,7 +114,10 @@ nav img {
 }
 
 .img_panier {
-  border: 2px solid #f3e9f1;
+  border: 2px solid #00000060;
+
+  object-fit: cover;
+  width: 150px;
 }
 
 #products_list {
@@ -129,6 +132,37 @@ nav img {
   margin-bottom: 50px;
   animation: ease-out 1s list_anim;
   width: 100%;
+}
+
+.box_panier {
+  display: flex;
+  height: fit-content;
+}
+
+.btn_panier {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.boutons_panier {
+  margin-top: 10px;
+}
+
+.box_panier_entier {
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.527);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.btn_panier:hover {
+  background: #f3e9f1;
+  color: black;
+  border: none;
+
+  border: 1px solid black;
 }
 
 @keyframes list_anim {

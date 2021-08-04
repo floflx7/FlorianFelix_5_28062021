@@ -3,29 +3,28 @@ const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
 
 fetch("http://localhost:3000/api/furniture/" + id)
-  .then((productSelected) => productSelected.json())
-  .then((productSelected) => {
-    ficheProduct(productSelected);
-    addProductToBasketAndRedirect(productSelected);
-    varnishProductOptions(productSelected);
+  .then((productPicked) => productPicked.json())
+  .then((productPicked) => {
+    BoxProduct(productPicked);
+    addProductToBasketAndRedirect(productPicked);
+    varnishProductOptions(productPicked);
   });
 
-function ficheProduct(productSelected) {
+function BoxProduct(productPicked) {
   const productBox = document.getElementById("productBox");
   const divBox = document.createElement("div");
   divBox.innerHTML = `
-          <div class="Box" mb-4>
-        <img src="${productSelected.imageUrl}" alt="${productSelected.name}"
-          <div class="product_description">
-        <h2>${productSelected.name}</h2>
-          <p div class="description">${productSelected.description}</p>
-              
-              <form id="AddToBasket">
-                    <div class="form-group row text-center input-group is-invalid m-0 py-0 pb-3">
-                        <select class="form-control-sm col-5 p-0" id="productVarnish" required>
-                        </select>
+          <div class="Box">
+        <img src="${productPicked.imageUrl}" alt="${productPicked.name}"
+      <div class="product_description">
+        <h2>${productPicked.name}</h2>
+          <p div class="description">${productPicked.description}</p>
+            <form id="AddToBasket">
+              <div class="form-group row text-center input-group is-invalid m-0 py-0 pb-3">
+                  <select class="form-control-sm col-5 p-0" id="productVarnish" required>
+                    </select>
                         <p class="card-text col-5 text-right font-weight-bold pr-0 pl-1"><strong>${
-                          productSelected.price / 100
+                          productPicked.price / 100
                         } €</strong></p>  
                     </div>
                     <button type="submit" name="add"  id="ok" >Ajouter au panier</button>
@@ -35,8 +34,8 @@ function ficheProduct(productSelected) {
   productBox.appendChild(divBox);
 }
 
-function varnishProductOptions(productSelected) {
-  const productVarnishs = productSelected.varnish;
+function varnishProductOptions(productPicked) {
+  const productVarnishs = productPicked.varnish;
   const productVarnish = document.getElementById("productVarnish");
   productVarnishs.forEach((varnish) => {
     const varnishOption = document.createElement("option");
@@ -46,27 +45,27 @@ function varnishProductOptions(productSelected) {
   });
 }
 
-function addProductToBasketAndRedirect(productSelected) {
+function addProductToBasketAndRedirect(productPicked) {
   const addProductToLocalStorage = document.getElementById("ok");
   addProductToLocalStorage.addEventListener("click", function (event) {
     event.preventDefault();
     $("#productAlertMessage").modal("show");
 
     productAcheter = {
-      productName: productSelected.name,
+      productName: productPicked.name,
       productVarnish: productVarnish.value,
-      productId: productSelected._id,
+      productId: productPicked._id,
       productQuantity: 1,
-      productPrice: productSelected.price / 100,
-      productImageUrl: productSelected.imageUrl,
+      productPrice: productPicked.price / 100,
+      productImageUrl: productPicked.imageUrl,
     };
-    modalAddProductToBasket(productSelected);
+    modalAddProductToBasket(productPicked);
     addToBasketGoToIndex();
     addToBasketGoToBasket();
   });
 }
 
-function modalAddProductToBasket(productSelected) {
+function modalAddProductToBasket(productPicked) {
   const productAlertMessage = document.getElementById("productAlertMessage");
   const productAlertMessageP = document.createElement("div");
   productAlertMessageP.classList.add("modal-dialog");
