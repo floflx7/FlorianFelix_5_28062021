@@ -137,6 +137,7 @@ nav img {
 .box_panier {
   display: flex;
   height: fit-content;
+  grid-gap: 50px;
 }
 
 .btn_panier {
@@ -151,13 +152,102 @@ nav img {
   margin-top: 10px;
 }
 
+.formulaireCommande {
+  display: none;
+  margin-top: 20px;
+}
+
+.fermerFormulaire {
+  float: right;
+  margin-top: -30px;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+}
+.fermerFormulaire:hover {
+  background: #f3e9f1;
+  color: black;
+  border: none;
+
+  border: 1px solid black;
+}
+
+.formSubmit {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 5px;
+  width: fit-content;
+}
+
+.formSubmit:hover {
+  background: #f3e9f1;
+  color: black;
+  border: none;
+
+  border: 1px solid black;
+}
+
+.total {
+  float: right;
+}
+
+.confirmation_produit {
+  display: none;
+  font-weight: bold;
+}
+
+.confirmation_produit a {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 5px;
+  width: fit-content;
+  font-weight: lighter;
+}
+
+#panier_vide {
+  text-align: center;
+  display: none;
+}
+
+.confirmation_produit a:hover {
+  background: #f3e9f1;
+  color: black;
+  border: none;
+
+  border: 1px solid black;
+}
+
 .box_panier_entier {
   box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.527);
   padding: 20px;
   border-radius: 20px;
+  top: 100px;
+  position: relative;
 }
 
 .btn_panier:hover {
+  background: #f3e9f1;
+  color: black;
+  border: none;
+
+  border: 1px solid black;
+}
+
+.btn_panier_vide {
+  background: white;
+  color: black;
+  border: 1px solid black;
+  text-decoration: none;
+  padding: 5px;
+  width: fit-content;
+}
+
+.btn_panier_vide:hover {
   background: #f3e9f1;
   color: black;
   border: none;
@@ -180,6 +270,11 @@ nav img {
   animation: 0.5s ease-out box_anim;
   transform: scale(1.05);
   box-shadow: 3px 3px 20px black;
+}
+
+.card_confirm {
+  text-align: center;
+  justify-content: center;
 }
 
 @keyframes box_anim {
