@@ -1,5 +1,7 @@
 let productBasket = JSON.parse(localStorage.getItem("achatProduit"));
 
+let productsId = [];
+
 const productName = document.getElementById("titrePage");
 const h2Name = document.createElement("h2");
 const emptyBasket = document.getElementById("emptyBasket");
@@ -33,11 +35,15 @@ function constructionPanier() {
               <div class=""><strong>${productItem.productPrice} €</strong></div></div>
               <hr>
               `;
+
     divProductItem.innerHTML = productBasketItemContent;
     productBasketItem.appendChild(divProductItem);
     i++;
     productTotal = productTotal + productItem.productPrice;
     console.log(productTotal);
+
+    productsId.push(productItem.productId);
+    console.log(productsId);
   });
   const productBasketTotal = document.getElementById("productBasketTotal");
   const divProductBasketTotal = document.createElement("div");
@@ -115,57 +121,27 @@ function constructionPanier() {
       regexAdress.test(contact.city) == true ||
       regexMail.test(contact.mail) == true
     ) {
-      const form = document.getElementById("formSubmit");
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        sendform();
-      });
-      function sendform() {
-        let products = [];
+      let result = {
+        products: productsId,
+      };
+      localStorage.setItem("montantCommande", productTotal);
+      const montantCommande = localStorage.getItem("productTotal");
+      console.log(productTotal);
 
-        let productTab = JSON.parse(sessionStorage.getItem("achatProduit"));
-
-        productTab.forEach((productBasket) => {
-          products.push(productBasket._id);
+      fetch("http://localhost:3000/api/furniture/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(result),
+      })
+        .then((response) => response.json())
+        .then((response) => {
+          let objCommande = {
+            idCommande: response.orderId,
+          };
+          let commande = JSON.stringify(objCommande);
+          localStorage.setItem("commande", commande);
+          console.log(objCommande);
         });
-
-        let contactItems = JSON.stringify({
-          contact,
-          products,
-        });
-        console.log(contactItems);
-        postOrder(contactItems);
-      }
-      // =====================================================================================
-
-      //Requête POST, envoi au serveur "contact" et le tableau d'id "products"
-      //Enregistre l'objet "contact" et Id, le total de la commande sur le sessionStorage.
-      //Envoie page "confirmation"
-      function postOrder(contactItems) {
-        fetch("http://localhost:3000/api/furniture/order", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          mode: "cors",
-          body: contactItems,
-        })
-          .then((response) => {
-            return response.json();
-          })
-          .then((r) => {
-            sessionStorage.setItem("contact", JSON.stringify(r.contact));
-            sessionStorage.setItem("orderId", JSON.stringify(r.orderId));
-
-            session.setItem("montantCommande", productTotal);
-            sessionStorage.removeItem("achatProduit");
-            window.location.replace("confirmation_commande.html");
-          })
-          .catch((e) => {
-            displayError();
-            console.log(e);
-          });
-      }
     } else {
       alert("Veuillez correctement remplir le formulaire");
       return false;

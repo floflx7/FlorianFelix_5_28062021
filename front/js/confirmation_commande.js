@@ -1,4 +1,4 @@
-const numeroCommande = localStorage.getItem("dataElt");
+const numeroCommande = localStorage.getItem("numeroCommande");
 const montantCommande = localStorage.getItem("montantCommande");
 
 console.log(numeroCommande);
