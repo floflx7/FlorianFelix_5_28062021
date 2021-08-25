@@ -1,27 +1,8 @@
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
-let currentUrl = window.location.href;
-const urlId = currentUrl.split("?id=");
-const productId = urlId[1];
-console.log(productId);
-const api = "http://localhost:3000/api/furniture/";
-const productUrl = api + urlId[1];
-console.log(productUrl);
-fetchDataProduct;
-//Récupérer les infos d'un produit depuis l'API
-function fetchDataProduct() {
-  fetch(productUrl) //récupérer l'id de l'API
-    .then((reponse) => reponse.json()) //traduire la réponse en JSON
-    .then((donneesProduit) => {
-      // Cette réponse,
-      console.table(donneesProduit); // l'afficher dans la console
-      displayProduct(donneesProduit); // et appeler la fonction displayProduct() déclarée en dessous.
-    })
-    .catch(function (error) {
-      console.log("Il y a eu un problème avec la récupération de l'id");
-    });
-}
+
+
 
 fetch("http://localhost:3000/api/furniture/" + id)
   .then((productPicked) => productPicked.json())
@@ -129,4 +110,3 @@ function thenRedirect() {
   productAuPanier.push(productAcheter);
   localStorage.setItem("achatProduit", JSON.stringify(productAuPanier));
 }
-fetchDataProduct();

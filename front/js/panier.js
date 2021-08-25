@@ -1,12 +1,23 @@
 let productBasket = JSON.parse(localStorage.getItem("achatProduit"));
 
-let productsId = [];
+//
+//let currentUrl = window.location.href;
+//console.log(currentUrl);
+// Trouver l'id de la commande et le prix total envoyé dans l'url
+//const urlOrder = currentUrl.split("=");
+//console.log(urlOrder);
+//const orderId = urlOrder[1](0, urlOrder[1].length - 6);
+//const orderPrice = urlOrder[2];
+
+//console.log("orderId", orderId);
+
+let products = [];
 
 const productName = document.getElementById("titrePage");
 const h2Name = document.createElement("h2");
 const emptyBasket = document.getElementById("emptyBasket");
 
-if (productBasket.length < 1) {
+if (productBasket < 1) {
 } else {
   emptyBasket.classList.add("d-none");
   constructionPanier();
@@ -42,8 +53,8 @@ function constructionPanier() {
     productTotal = productTotal + productItem.productPrice;
     console.log(productTotal);
 
-    productsId.push(productItem.productId);
-    console.log(productsId);
+    products.push(productItem);
+    console.log(products);
   });
   const productBasketTotal = document.getElementById("productBasketTotal");
   const divProductBasketTotal = document.createElement("div");
@@ -106,9 +117,9 @@ function constructionPanier() {
   myForm.addEventListener("click", function (event) {
     event.preventDefault();
 
-    let contact = {
+    const contact = {
       name: document.getElementById("formNom").value,
-      firstname: document.getElementById("formPrenom").value,
+      firstName: document.getElementById("formPrenom").value,
       adress: document.getElementById("formAdress").value,
       city: document.getElementById("formCity").value,
       email: document.getElementById("formEmail").value,
@@ -121,26 +132,31 @@ function constructionPanier() {
       regexAdress.test(contact.city) == true ||
       regexMail.test(contact.mail) == true
     ) {
-      let result = {
-        products: productsId,
-      };
+      const result = { contact, products };
+
       localStorage.setItem("montantCommande", productTotal);
-      const montantCommande = localStorage.getItem("productTotal");
-      console.log(productTotal);
+      console.log("products", products);
+
+      console.log("result", result);
 
       fetch("http://localhost:3000/api/furniture/order", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-type": "application/json; charset=utf-8 ",
+        },
         body: JSON.stringify(result),
       })
+        //réponse du serveur
         .then((response) => response.json())
-        .then((response) => {
-          let objCommande = {
-            idCommande: response.orderId,
-          };
+        .then((responseParsed) => {
+          let orderId = responseParsed.orerId;
+
+          console.log(objCommande);
           let commande = JSON.stringify(objCommande);
           localStorage.setItem("commande", commande);
-          console.log(objCommande);
+        })
+        .catch((error) => {
+          console.error("error", error);
         });
     } else {
       alert("Veuillez correctement remplir le formulaire");

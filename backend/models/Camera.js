@@ -18,8 +18,8 @@ const cameras = [
     ],
     "_id": "5be1ef211c9d44000030b062",
     "name": "Hirsch 400DTS",
-    "price": 309900,
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "price": 309900,
     "imageUrl": "vcam_2.jpg"
   },
   {
@@ -39,8 +39,8 @@ const cameras = [
     ],
     "_id": "5be9c4471c9d440000a730e8",
     "name": "Kuros TTS",
-    "price": 159900,
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "price": 159900,
     "imageUrl": "vcam_4.jpg"
   },
   {
@@ -51,8 +51,8 @@ const cameras = [
     ],
     "_id": "5be9c4c71c9d440000a730e9",
     "name": "Katatone",
-    "price": 59900,
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "price": 59900,
     "imageUrl": "vcam_5.jpg"
   }
 ];

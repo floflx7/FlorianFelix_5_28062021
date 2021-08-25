@@ -23,8 +23,7 @@ exports.getOneCamera = (req, res, next) => {
       if (!camera) {
         return res.status(404).send(new Error('Camera not found!'));
       }
-      camera.imageUrl = req.protoc
-      ol + '://' + req.get('host') + '/images/' + camera.imageUrl;
+      camera.imageUrl = req.protocol + '://' + req.get('host') + '/images/' + camera.imageUrl;
       res.status(200).json(camera);
     }
   ).catch(
