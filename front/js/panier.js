@@ -51,10 +51,8 @@ function constructionPanier() {
     productBasketItem.appendChild(divProductItem);
     i++;
     productTotal = productTotal + productItem.productPrice;
-    console.log(productTotal);
 
     products.push(productItem);
-    console.log(products);
   });
   const productBasketTotal = document.getElementById("productBasketTotal");
   const divProductBasketTotal = document.createElement("div");
@@ -124,7 +122,7 @@ function constructionPanier() {
       city: document.getElementById("formCity").value,
       email: document.getElementById("formEmail").value,
     };
-    console.log(contact);
+ 
     if (
       regexName.test(contact.name) == true ||
       regexFirstName.test(contact.firstName) == true ||
@@ -135,9 +133,6 @@ function constructionPanier() {
       const result = { contact, products };
 
       localStorage.setItem("montantCommande", productTotal);
-      console.log("products", products);
-
-      console.log("result", result);
 
       fetch("http://localhost:3000/api/furniture/order", {
         method: "POST",
@@ -148,10 +143,12 @@ function constructionPanier() {
       })
         //réponse du serveur
         .then((response) => response.json())
-        .then((responseParsed) => {
-          let orderId = responseParsed.orerId;
+        .then((result) => {
+          let objCommande = {
+            idCommande: result.orderId,
+            contact: contact,
+          };
 
-          console.log(objCommande);
           let commande = JSON.stringify(objCommande);
           localStorage.setItem("commande", commande);
         })
