@@ -238,6 +238,9 @@ nav img {
   border: 1px solid black;
 }
 
+.card_confirm {
+}
+
 .btn_panier_vide {
   background: white;
   color: black;
@@ -247,12 +250,12 @@ nav img {
   width: fit-content;
 }
 
-.btn_panier_vide:hover {
+a .btn_panier_vide:hover {
   background: #f3e9f1;
   color: black;
   border: none;
-
   border: 1px solid black;
+  margin-left: 50%;
 }
 
 @keyframes list_anim {

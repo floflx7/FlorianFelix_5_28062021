@@ -52,7 +52,7 @@ function constructionPanier() {
     i++;
     productTotal = productTotal + productItem.productPrice;
 
-    products.push(productItem);
+    products.push(productItem.productId);
   });
   const productBasketTotal = document.getElementById("productBasketTotal");
   const divProductBasketTotal = document.createElement("div");
@@ -99,15 +99,16 @@ function constructionPanier() {
     formulaireShow.style.display = "none";
   });
 
-  const regexName = /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
-
   const regexFirstName =
+    /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
+
+  const regexLastName =
     /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
 
   const regexCity =
     /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+)){1,10}$/;
 
-  const regexAdress = /^(([a-zA-ZÀ-ÿ0-9]+[\s\-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,10}$/;
+  const regexAddress = /^(([a-zA-ZÀ-ÿ0-9]+[\s\-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,10}$/;
 
   const regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
 
@@ -116,21 +117,21 @@ function constructionPanier() {
     event.preventDefault();
 
     const contact = {
-      name: document.getElementById("formNom").value,
-      firstName: document.getElementById("formPrenom").value,
-      adress: document.getElementById("formAdress").value,
+      firstName: document.getElementById("formNom").value,
+      lastName: document.getElementById("formPrenom").value,
+      address: document.getElementById("formAdress").value,
       city: document.getElementById("formCity").value,
       email: document.getElementById("formEmail").value,
     };
- 
+
     if (
-      regexName.test(contact.name) == true ||
       regexFirstName.test(contact.firstName) == true ||
+      regexLastName.test(contact.lastName) == true ||
       regexCity.test(contact.city) == true ||
-      regexAdress.test(contact.city) == true ||
+      regexAddress.test(contact.city) == true ||
       regexMail.test(contact.mail) == true
     ) {
-      const result = { contact, products };
+      let result = { contact, products };
 
       localStorage.setItem("montantCommande", productTotal);
 
@@ -143,14 +144,19 @@ function constructionPanier() {
       })
         //réponse du serveur
         .then((response) => response.json())
-        .then((result) => {
-          let objCommande = {
-            idCommande: result.orderId,
+        .then((response) => {
+          let numCommande = {
+            order: response.orderId,
+          };
+
+          let conCommande = {
             contact: contact,
           };
 
-          let commande = JSON.stringify(objCommande);
-          localStorage.setItem("commande", commande);
+          localStorage.setItem("numCommande", JSON.stringify(numCommande));
+          localStorage.setItem("conCommande", JSON.stringify(conCommande));
+
+          window.location = "confirmation_commande.html";
         })
         .catch((error) => {
           console.error("error", error);

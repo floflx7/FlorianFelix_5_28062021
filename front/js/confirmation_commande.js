@@ -1,23 +1,31 @@
-const numeroCommande = localStorage.getItem("commande");
+const numeroCommande = localStorage.getItem("numCommande");
 const montantCommande = localStorage.getItem("montantCommande");
-
+const test = JSON.parse(numeroCommande);
 console.log(numeroCommande);
-
+console.log(test.order);
 const recapitulatifCommande = document.getElementById("recapitulatifCommande");
 const recapDiv = document.createElement("div");
-recapDiv.classList.add("col-12", "col-md-8", "col-lg-6", "mb-3");
+
 recapDiv.innerHTML = `
-    <div class="row">
-                <div class="col-sm-4 col-md-3 text-center">Numéro :</div>
-                <div class="col user-select-all">${numeroCommande}</div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 col-md-3">Montant :</div>
-                <div class="col">${montantCommande} €</div> 
-            </div>
+<div class="Box">
+<div class="row justify-content-center ">
+                Numéro :
+                <strong>${test.order}</strong></div>
+            
+            <div class="row justify-content-center">
+                Total :
+                <strong>${montantCommande} €</strong></div> 
+            <hr>
+            <a
+      role="button"
+      class="btn_panier_vide text-center text-uppercase "
+      href="./index.html"
+      >Accueil</a
+    >
         </div>
-        
-    `;
+</div>
+`;
+
 recapitulatifCommande.appendChild(recapDiv);
 
 localStorage.clear();
