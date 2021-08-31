@@ -47,6 +47,31 @@ nav img {
   z-index: 0;
 }
 
+footer {
+  background-color: #f3e9f1;
+  width: 100%;
+  height: 100px;
+  padding: 0px;
+}
+
+footer .textFooter {
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+  padding-top: 20px;
+}
+
+footer a i {
+  color: black;
+}
+
+footer a i:hover {
+  color: black;
+  color: #7a4774;
+  animation: ease-in 0.2s opacity;
+}
+
 .box {
   box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.603);
   border-radius: 20px 20px 20px 20px;

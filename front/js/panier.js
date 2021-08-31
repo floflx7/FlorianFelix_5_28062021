@@ -1,41 +1,27 @@
+// Récupération des produits choisis
 let productBasket = JSON.parse(localStorage.getItem("achatProduit"));
 
-//
-//let currentUrl = window.location.href;
-//console.log(currentUrl);
-// Trouver l'id de la commande et le prix total envoyé dans l'url
-//const urlOrder = currentUrl.split("=");
-//console.log(urlOrder);
-//const orderId = urlOrder[1](0, urlOrder[1].length - 6);
-//const orderPrice = urlOrder[2];
-
-//console.log("orderId", orderId);
-
+// Création du tableau products
 let products = [];
 
 const productName = document.getElementById("titrePage");
 const h2Name = document.createElement("h2");
 const emptyBasket = document.getElementById("emptyBasket");
 
+// Création d'une condition, panier vide ou création du panier
 if (productBasket < 1) {
 } else {
   emptyBasket.classList.add("d-none");
   constructionPanier();
 }
 
-function confirmation() {
-  const panierVide = document.getElementsById("message_panier_vide");
-  button_product.addEventListener("click", function (event) {
-    event.preventDefault();
-    panierVide.style.display = "block";
-  });
-}
-
+// Création du panier
 function constructionPanier() {
   i = 0;
   productTotal = 0;
   const productBasketItem = document.getElementById("productBasketList");
 
+  // Pour chaques produits afficher:
   productBasket.forEach((productItem) => {
     const divProductItem = document.createElement("div");
     const productBasketItemContent = `            
@@ -45,15 +31,21 @@ function constructionPanier() {
               <div class="">Vernis:"${productItem.productVarnish}"</div>
               <div class=""><strong>${productItem.productPrice} €</strong></div></div>
               <hr>
+              
               `;
 
     divProductItem.innerHTML = productBasketItemContent;
     productBasketItem.appendChild(divProductItem);
     i++;
+
+    // Création de productTotal (prix total)
     productTotal = productTotal + productItem.productPrice;
 
+    // id de produit récupérer et envoi vers le tableau products
     products.push(productItem.productId);
   });
+
+  // Affichage de productTotal
   const productBasketTotal = document.getElementById("productBasketTotal");
   const divProductBasketTotal = document.createElement("div");
   const ProductBasketTotalContent = `
@@ -128,7 +120,7 @@ function constructionPanier() {
       regexFirstName.test(contact.firstName) == true ||
       regexLastName.test(contact.lastName) == true ||
       regexCity.test(contact.city) == true ||
-      regexAddress.test(contact.city) == true ||
+      regexAddress.test(contact.adress) == true ||
       regexMail.test(contact.mail) == true
     ) {
       let result = { contact, products };
@@ -145,16 +137,22 @@ function constructionPanier() {
         //réponse du serveur
         .then((response) => response.json())
         .then((response) => {
-          let numCommande = {
+          let numeroCommande = {
             order: response.orderId,
           };
 
-          let conCommande = {
+          let contactCommande = {
             contact: contact,
           };
 
-          localStorage.setItem("numCommande", JSON.stringify(numCommande));
-          localStorage.setItem("conCommande", JSON.stringify(conCommande));
+          localStorage.setItem(
+            "numeroCommande",
+            JSON.stringify(numeroCommande)
+          );
+          localStorage.setItem(
+            "contactCommande",
+            JSON.stringify(contactCommande)
+          );
 
           window.location = "confirmation_commande.html";
         })

@@ -2,8 +2,6 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
 
-
-
 fetch("http://localhost:3000/api/furniture/" + id)
   .then((productPicked) => productPicked.json())
   .then((productPicked) => {
@@ -97,16 +95,16 @@ function addToBasketGoToBasket() {
 }
 
 function firstAdd() {
-  productAuPanier = JSON.parse(localStorage.getItem("achatProduit"));
-  if (productAuPanier) {
+  productToBasket = JSON.parse(localStorage.getItem("achatProduit"));
+  if (productToBasket) {
     thenRedirect();
   } else {
-    productAuPanier = [];
+    productToBasket = [];
     thenRedirect();
   }
 }
 
 function thenRedirect() {
-  productAuPanier.push(productAcheter);
-  localStorage.setItem("achatProduit", JSON.stringify(productAuPanier));
+  productToBasket.push(productAcheter);
+  localStorage.setItem("achatProduit", JSON.stringify(productToBasket));
 }
