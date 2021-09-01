@@ -1,3 +1,4 @@
+//Récupération id produit
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const id = urlParams.get("id");
@@ -10,6 +11,7 @@ fetch("http://localhost:3000/api/furniture/" + id)
     varnishProductOptions(productPicked);
   });
 
+//Création de box avec le produit choisi
 function BoxProduct(productPicked) {
   const productBox = document.getElementById("productBox");
   const divBox = document.createElement("div");
@@ -20,10 +22,10 @@ function BoxProduct(productPicked) {
         <h2>${productPicked.name}</h2>
           <p div class="description">${productPicked.description}</p>
             <form id="AddToBasket">
-              <div class="form-group row text-center input-group is-invalid m-0 py-0 pb-3">
+              <div class="row ">
                   <select class="form-control-sm col-5 p-0" id="productVarnish" required>
                     </select>
-                        <p class="card-text col-5 text-right font-weight-bold pr-0 pl-1"><strong>${
+                        <p class="col-sm"><strong>${
                           productPicked.price / 100
                         } €</strong></p>  
                     </div>
@@ -40,6 +42,7 @@ function BoxProduct(productPicked) {
   productBox.appendChild(divBox);
 }
 
+//création d'une fonction permettant d'afficher les différents vernis
 function varnishProductOptions(productPicked) {
   const productVarnishs = productPicked.varnish;
   const productVarnish = document.getElementById("productVarnish");
@@ -51,6 +54,7 @@ function varnishProductOptions(productPicked) {
   });
 }
 
+//fonction qui permet d'envoyer l'object du produit vers le panier
 function addProductToBasketAndRedirect(productPicked) {
   const button_product = document.getElementById("ok");
   button_product.addEventListener("click", function (event) {
@@ -65,46 +69,39 @@ function addProductToBasketAndRedirect(productPicked) {
       productImageUrl: productPicked.imageUrl,
     };
     confirmation();
-    addToBasketGoToIndex();
-    addToBasketGoToBasket();
+    redirectionBoutonConfirmation();
   });
 }
 
+//fonction qui permet l'affichage du boutton vers panier ou accueil
 function confirmation() {
   const button_product = document.getElementById("ok");
   const confirmationProduit = document.querySelector(".confirmation_produit");
   button_product.addEventListener("click", function (event) {
     event.preventDefault();
-    confirmationProduit.style.display = "block";
     button_product.style.display = "none";
+    confirmationProduit.style.display = "block";
   });
 }
 
-function addToBasketGoToIndex() {
+function redirectionBoutonConfirmation() {
   const button_product = document.getElementById("ok");
   button_product.addEventListener("click", function (event) {
-    firstAdd();
+    ajoutProduit();
   });
 }
 
-function addToBasketGoToBasket() {
-  const button_product = document.getElementById("ok");
-  button_product.addEventListener("click", function (event) {
-    firstAdd();
-  });
-}
-
-function firstAdd() {
+function ajoutProduit() {
   productToBasket = JSON.parse(localStorage.getItem("achatProduit"));
   if (productToBasket) {
-    thenRedirect();
+    envoiPanier();
   } else {
     productToBasket = [];
-    thenRedirect();
+    envoiPanier();
   }
 }
 
-function thenRedirect() {
+function envoiPanier() {
   productToBasket.push(productAcheter);
   localStorage.setItem("achatProduit", JSON.stringify(productToBasket));
 }

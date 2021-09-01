@@ -1,9 +1,12 @@
+// appel de l'Api avec fetch
+
 fetch("http://localhost:3000/api/furniture")
   .then((productsList) => productsList.json())
   .then((productsList) => {
     tableauProducts(productsList);
   });
 
+// Création de la fonction visant à créer des box avec les informations des produits
 function tableauProducts(productsList) {
   const mainProduct = document.getElementById("products_list");
   productsList.forEach((productList) => {

@@ -6,6 +6,10 @@ h2 {
   font-size: 10px;
 }
 
+.menu i {
+  animation: ease-in 0.2s opacity;
+}
+
 .produits_prix #titre_produits {
   font-size: 20px;
   float: left;
@@ -16,6 +20,24 @@ h2 {
   text-decoration: none;
   color: black;
   transition: ease-out 0.2s all;
+}
+
+.menu a:hover .menu i {
+  animation: ease-out 0.5s move;
+}
+
+@keyframes move {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  80% {
+    transform: rotate(40deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .menu a:hover {
@@ -110,6 +132,7 @@ footer a i:hover {
   background: white;
   color: black;
   border: 1px solid black;
+  margin-top: 20px;
 }
 
 .Box button:hover {
@@ -178,13 +201,15 @@ footer a i:hover {
 }
 
 .formulaireCommande {
-  display: none;
   margin-top: 20px;
+}
+
+.form_box {
+  display: block;
 }
 
 .fermerFormulaire {
   float: right;
-  margin-top: -30px;
   background: white;
   color: black;
   border: 1px solid black;
@@ -222,6 +247,7 @@ footer a i:hover {
 .confirmation_produit {
   display: none;
   font-weight: bold;
+  margin-top: 20px;
 }
 
 .confirmation_produit a {
