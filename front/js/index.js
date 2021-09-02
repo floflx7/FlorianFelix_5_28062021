@@ -13,12 +13,16 @@ function tableauProducts(productsList) {
     const divProduct = document.createElement("div");
     divProduct.innerHTML = `
     <div class="box">
-    <a href="produit.html?id=${productList._id}">        
-    <img src="${productList.imageUrl}" alt="${productList.name}">
-    </a>
-        <h3>${productList.name}</h3>
+        <img src="${productList.imageUrl}" alt="${productList.name}">
+    <h3>${productList.name}</h3>
               <p><strong>${productList.price / 100} €</strong></p>
               <p class="product_description">${productList.description}</p>
+              <a
+      role="button"
+      class="btn_panier text-center text-uppercase "
+      href="produit.html?id=${productList._id}"
+      >Acheter</a
+    >
             </div>`;
 
     mainProduct.appendChild(divProduct);

@@ -10,7 +10,8 @@ const recapitulatifCommande = document.getElementById("recapitulatifCommande");
 const recapDiv = document.createElement("div");
 
 recapDiv.innerHTML = `
-<div class="Box">
+<div class="Box_conf">
+<h1 class="text-center">Commande confirmée</h1>
 <div class="row justify-content-center ">
                 Numéro :
                 <strong>${numeroParse.order}</strong></div>
@@ -31,7 +32,7 @@ recapDiv.innerHTML = `
         <hr>
             <a
       role="button"
-      class="btn_panier text-center text-uppercase "
+      class="btn_panier  text-center text-uppercase "
       href="./index.html"
       >Accueil</a
     >

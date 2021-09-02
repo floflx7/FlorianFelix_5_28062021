@@ -52,7 +52,69 @@
           </div>
           <div id="productBasketList"></div>
           <div id="productBasketTotal"></div>
-          
+          <form class="formulaireCommande" id="form">
+            <h3>Formulaire de commande</h3>
+            <button class="fermerFormulaire">Annuler</button>
+            <div class="align-items-center">
+              <hr />
+              <div class="form-group">
+                <label for="formNom" class="col-sm-2 col-form-label">Nom</label>
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm bg-light"
+                    id="formNom"
+                    required
+                  />
+                </div>
+                <label for="formPrenom" class="col-form-label">Prenom</label>
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm bg-light"
+                    id="formPrenom"
+                    required
+                  />
+                </div>
+                <label for="formAdress" class="col-sm-2 col-form-label"
+                  >Adresse</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm bg-light"
+                    id="formAdress"
+                    required
+                  />
+                </div>
+                <label for="formAdress" class="col-sm-2 col-form-label"
+                  >Ville</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm bg-light"
+                    id="formCity"
+                    required
+                  />
+                </div>
+                <label for="formEmail" class="col-sm-2 col-form-label"
+                  >E-mail</label
+                >
+                <div class="col-sm-10">
+                  <input
+                    type="email"
+                    class="form-control form-control-sm bg-light"
+                    id="formEmail"
+                    required
+                  />
+                </div>
+              </div>
+              <button id="formSubmit" class="btn_panier_confirm" type="submit">
+                confirmer commande
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -60,14 +122,14 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h3>Confirmation</h3>
+            <h3>Vider le panier ?</h3>
           </div>
-          <div class="modal-body">
-            Êtes-vous sur de vouloir vider votre panier ?
-          </div>
+
           <div class="modal-footer">
-            <button type="button" data-dismiss="modal">Annuler</button>
-            <button type="button" id="ConfirmDeleteBasket">
+            <button class="btn_panier" type="button" data-dismiss="modal">
+              Annuler
+            </button>
+            <button class="btn_panier" type="button" id="ConfirmDeleteBasket">
               Vider le panier
             </button>
           </div>

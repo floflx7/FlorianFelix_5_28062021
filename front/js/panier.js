@@ -78,93 +78,19 @@ function constructionPanier() {
     window.location.href = "panier.html";
   });
 
-  const formulaireShow = document.querySelector(".box_panier_entier");
+  const formulaireShow = document.querySelector(".formulaireCommande");
   const validerAchat = document.getElementById("validerAchat");
-  const divBox = document.createElement("div");
   validerAchat.addEventListener("click", function (event) {
     event.preventDefault();
-    divBox.innerHTML = `
-    <div class="form_box">
-    <button class="fermerFormulaire">Annuler</button>
-    <form action="confirmation_commande.html" class="formulaireCommande">
-            <h3>Formulaire de commande</h3>
-            
-            <div class="align-items-center">
-              <hr />
-              <div class="form-group row">
-                <label for="formNom" class="col-sm-2 col-form-label">Nom</label>
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control form-control-sm bg-light"
-                    id="formNom"
-                    required
-                  />
-                </div>
-                <label for="formPrenom" class="col-sm-2 col-form-label"
-                  >Prenom</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control form-control-sm bg-light"
-                    id="formPrenom"
-                    required
-                  />
-                </div>
-                <label for="formAdress" class="col-sm-2 col-form-label"
-                  >Adresse</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control form-control-sm bg-light"
-                    id="formAdress"
-                    required
-                  />
-                </div>
-                <label for="formAdress" class="col-sm-2 col-form-label"
-                  >Ville</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="form-control form-control-sm bg-light"
-                    id="formCity"
-                    required
-                  />
-                </div>
-                <label for="formEmail" class="col-sm-2 col-form-label"
-                  >E-mail</label
-                >
-                <div class="col-sm-10">
-                  <input
-                    type="email"
-                    class="form-control form-control-sm bg-light"
-                    id="formEmail"
-                    required
-                  />
-                </div>
-                <button id="formSubmit" class="btn_panier" type="submit">
-                  confirmer commande
-                </button>
-              </div>
-            </div>
-          </form>
-          </div>
-    `;
-    formulaireShow.appendChild(divBox);
+    formulaireShow.style.display = "block";
   });
 
-  function fermerFormulaireAnd() {
-    const fermerFormulaire = document.querySelector(".fermerFormulaire");
-    const formBox = document.getElementsByClassName("form_box");
-    fermerFormulaire.addEventListener("click", function (event) {
-      event.preventDefault();
-      formBox.style.display = "none";
-    });
-  }
-  
+  const fermerFormulaire = document.querySelector(".fermerFormulaire");
+  fermerFormulaire.addEventListener("click", function (event) {
+    event.preventDefault();
+    formulaireShow.style.display = "none";
+    $("#form")[0].reset();
+  });
 
   const regexFirstName =
     /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
