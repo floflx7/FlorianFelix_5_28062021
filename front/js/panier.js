@@ -55,8 +55,8 @@ function constructionPanier() {
   divProductBasketTotal.innerHTML = ProductBasketTotalContent;
   productBasketTotal.appendChild(divProductBasketTotal);
 
+  //Affichage bouton vider panier
   const divProductBasketButtons = document.createElement("div");
-
   divProductBasketButtons.setAttribute("id", ConfirmDeleteBasket);
   const productBasketButtonContent = `
         <div class="boutons_panier">
@@ -65,19 +65,22 @@ function constructionPanier() {
   divProductBasketButtons.innerHTML = productBasketButtonContent;
   productBasketTotal.appendChild(divProductBasketButtons);
 
-  const DeleteBasket = document.getElementById("supprimerProduct");
-  DeleteBasket.addEventListener("click", function (event) {
+  // Afficher modal vider panier ou non
+  const viderPanier = document.getElementById("supprimerProduct");
+  viderPanier.addEventListener("click", function (event) {
     event.preventDefault();
     $("#EmptyBasket").modal("show");
   });
 
-  const ConfirmEmptyBasket = document.getElementById("ConfirmDeleteBasket");
-  ConfirmEmptyBasket.addEventListener("click", function (event) {
+  // Local storage clear et redirection vers index.html
+  const confirmViderPanier = document.getElementById("ConfirmDeleteBasket");
+  confirmViderPanier.addEventListener("click", function (event) {
     event.preventDefault();
     localStorage.clear();
     window.location.href = "panier.html";
   });
 
+  // Affichage du formulaire de commande
   const formulaireShow = document.querySelector(".formulaireCommande");
   const validerAchat = document.getElementById("validerAchat");
   validerAchat.addEventListener("click", function (event) {
@@ -85,6 +88,7 @@ function constructionPanier() {
     formulaireShow.style.display = "block";
   });
 
+  // Bouton annuler formulaire
   const fermerFormulaire = document.querySelector(".fermerFormulaire");
   fermerFormulaire.addEventListener("click", function (event) {
     event.preventDefault();
@@ -92,23 +96,25 @@ function constructionPanier() {
     $("#form")[0].reset();
   });
 
+  // Regex pour vérification du formulaire
   const regexFirstName =
     /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
 
   const regexLastName =
     /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
 
-  const regexCity =
-    /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+)){1,10}$/;
+  const regexCity = /^(([a-zA-ZÀ-ÿ]+[\s\-]{1}[a-zA-ZÀ-ÿ]+)|([a-zA-ZÀ-ÿ]+))$/;
 
   const regexAddress = /^(([a-zA-ZÀ-ÿ0-9]+[\s\-]{1}[a-zA-ZÀ-ÿ0-9]+)){1,10}$/;
 
   const regexMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]{2,}\.[a-z]{2,4}$/;
 
+  // bouton submit formulaire
   const myForm = document.getElementById("formSubmit");
   myForm.addEventListener("click", function (event) {
     event.preventDefault();
 
+    // Objet contact
     const contact = {
       firstName: document.getElementById("formNom").value,
       lastName: document.getElementById("formPrenom").value,
@@ -117,17 +123,18 @@ function constructionPanier() {
       email: document.getElementById("formEmail").value,
     };
 
+    //Vérification des champs du formulaire avec regex
     if (
-      regexFirstName.test(contact.firstName) == true ||
-      regexLastName.test(contact.lastName) == true ||
-      regexCity.test(contact.city) == true ||
-      regexAddress.test(contact.adress) == true ||
-      regexMail.test(contact.mail) == true
+      regexFirstName.test(contact.firstName) == true &&
+      regexLastName.test(contact.lastName) == true &&
+      regexCity.test(contact.city) == true &&
+      regexAddress.test(contact.address) == true &&
+      regexMail.test(contact.email) == true
     ) {
+      // Création objet {result} regroupant contact et products
       let result = { contact, products };
 
-      localStorage.setItem("montantCommande", productTotal);
-
+      // Méthode POST
       fetch("http://localhost:3000/api/furniture/order", {
         method: "POST",
         headers: {
@@ -138,10 +145,12 @@ function constructionPanier() {
         //réponse du serveur
         .then((response) => response.json())
         .then((response) => {
+          // Création de l'objet numeroCommande récupération de orderId
           let numeroCommande = {
             order: response.orderId,
           };
 
+          // Création de l'objet
           let contactCommande = {
             contact: contact,
           };
@@ -155,6 +164,8 @@ function constructionPanier() {
             JSON.stringify(contactCommande)
           );
 
+          localStorage.setItem("montantCommande", productTotal);
+
           window.location = "confirmation_commande.html";
           localStorage(clear);
         })
@@ -162,6 +173,7 @@ function constructionPanier() {
           console.error("error", error);
         });
     } else {
+      console.log(contact);
       alert("Veuillez correctement remplir le formulaire");
       return false;
     }

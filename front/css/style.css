@@ -4,7 +4,7 @@ html {
 
 body {
   font-family: "Roboto", sans-serif;
-
+  overflow-x: hidden;
   position: relative;
   min-height: 100%;
 }
@@ -27,30 +27,16 @@ h2 {
   text-decoration: none;
   color: black;
   transition: ease-out 0.2s all;
-}
-
-.menu i:hover {
-  animation: ease-out 0.5s move;
-}
-
-@keyframes move {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  80% {
-    transform: rotate(40deg);
-  }
-
-  100% {
-    transform: rotate(0deg);
-  }
+  font-size: 18px;
 }
 
 .menu a:hover {
   text-decoration: none;
   color: #7a4774;
   animation: ease-in 0.2s opacity;
+  animation: ease-in 0.2s grow;
+
+  letter-spacing: 2px;
 }
 
 @keyframes opacity {
@@ -124,12 +110,26 @@ footer .textFooter {
 
 footer a i {
   color: black;
+  width: 50px;
+  transition: ease-out 0.2s all;
 }
 
 footer a i:hover {
   color: black;
   color: #7a4774;
   animation: ease-in 0.2s opacity;
+  animation: ease-in 0.2s grow;
+  transform: scale(1.2);
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(1.2);
+  }
 }
 
 .box {
@@ -151,7 +151,7 @@ footer a i:hover {
   max-width: 1000px;
   height: fit-content;
   min-width: 200px;
-  transition: ease-out 0.5s all;
+
   padding-bottom: 20px;
   margin-top: 20px;
   text-align: center;
@@ -270,14 +270,38 @@ footer a i:hover {
 
 @keyframes fade {
   0% {
-    opacity: 100%;
-
     border-radius: 10px;
     background: white;
   }
 
   100% {
-    opacity: 100%;
+    border-radius: 0px;
+    background: #f3e9f1;
+  }
+}
+
+.btn_panier:active {
+  box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.185);
+  animation: ease-out 0.1s shadow;
+
+  background: #f3e9f1;
+  color: black;
+  border: none;
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+@keyframes shadow {
+  0% {
+    box-shadow: inset 0px 0px 0px rgba(0, 0, 0, 0.185);
+  }
+
+  50% {
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.185);
+  }
+
+  100% {
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.185);
   }
 }
 
@@ -294,13 +318,31 @@ footer a i:hover {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
+  border-radius: 10px;
+  transition: ease-in 0.5s all;
+  animation: ease-in 0.5s btn_send;
 }
 
 .btn_panier_confirm:hover {
   background: #f3e9f1;
   color: black;
   border: none;
+  border-radius: 0px;
   border: 1px solid black;
+}
+
+@keyframes btn_send {
+  0% {
+    opacity: 0;
+  }
+
+  70% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .boutons_panier {
@@ -311,6 +353,23 @@ footer a i:hover {
   display: none;
   margin-top: 20px;
   padding-bottom: 50px;
+  animation: ease-out 0.4s form;
+  transition: ease-out 2s all;
+}
+
+@keyframes form {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  40% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+    transform: translateX(0px);
+  }
 }
 
 .form-group {
@@ -326,13 +385,16 @@ footer a i:hover {
   color: black;
   border: 1px solid black;
   text-decoration: none;
+  border-radius: 10px;
+  transition: ease-in 0.5s all;
 }
 .fermerFormulaire:hover {
   background: #f3e9f1;
   color: black;
   border: none;
-
+  border-radius: 0px;
   border: 1px solid black;
+  animation: ease-out 0.4s fade;
 }
 
 .formSubmit {
@@ -391,6 +453,7 @@ footer a i:hover {
   border-radius: 20px;
   top: 100px;
   position: relative;
+  animation: ease-out 0.4s btn_send;
 }
 
 .btn_panier_vide {

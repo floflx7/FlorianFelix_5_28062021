@@ -29,7 +29,7 @@ function BoxProduct(productPicked) {
                           productPicked.price / 100
                         } €</strong></p>  
                     </div>
-                    <button type="submit" name="add"  id="ok" >Ajouter au panier</button>
+                    <button class="btn_panier" type="submit" name="add"  id="ok" >Ajouter au panier</button>
                     <div class="confirmation_produit">
                     <p>produit ajouté au panier</p>
                     <a href="index.html" id="index">accueil</a>
