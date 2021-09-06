@@ -60,7 +60,7 @@ function addProductToBasketAndRedirect(productPicked) {
   button_product.addEventListener("click", function (event) {
     event.preventDefault();
 
-    productAcheter = {
+    productObj = {
       productName: productPicked.name,
       productVarnish: productVarnish.value,
       productId: productPicked._id,
@@ -69,7 +69,8 @@ function addProductToBasketAndRedirect(productPicked) {
       productImageUrl: productPicked.imageUrl,
     };
     confirmation();
-    redirectionBoutonConfirmation();
+
+    ajoutProduit();
   });
 }
 
@@ -77,18 +78,8 @@ function addProductToBasketAndRedirect(productPicked) {
 function confirmation() {
   const button_product = document.getElementById("ok");
   const confirmationProduit = document.querySelector(".confirmation_produit");
-  button_product.addEventListener("click", function (event) {
-    event.preventDefault();
-    button_product.style.display = "none";
-    confirmationProduit.style.display = "block";
-  });
-}
-
-function redirectionBoutonConfirmation() {
-  const button_product = document.getElementById("ok");
-  button_product.addEventListener("click", function (event) {
-    ajoutProduit();
-  });
+  button_product.style.display = "none";
+  confirmationProduit.style.display = "block";
 }
 
 function ajoutProduit() {
@@ -99,9 +90,12 @@ function ajoutProduit() {
     productToBasket = [];
     envoiPanier();
   }
+  console.log(productToBasket.length);
 }
 
 function envoiPanier() {
-  productToBasket.push(productAcheter);
+  const combien = productToBasket.length;
+  productToBasket.push(productObj);
   localStorage.setItem("achatProduit", JSON.stringify(productToBasket));
+  localStorage.setItem("longeur", JSON.stringify(combien));
 }

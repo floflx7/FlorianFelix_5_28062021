@@ -12,6 +12,7 @@ const recapDiv = document.createElement("div");
 recapDiv.innerHTML = `
 <div class="Box_conf">
 <h1 class="text-center">Commande confirmée</h1>
+<i class="far fa-check-circle"></i>
 <div class="row justify-content-center ">
                 Numéro :
                 <strong>${numeroParse.order}</strong></div>
@@ -20,23 +21,19 @@ recapDiv.innerHTML = `
                 Total :
                 <strong>${montantCommande} €</strong></div> 
             <hr>
-            <div class="row justify-content-center "><strong>Adresse de livraison :</strong></div>
             <div class="row justify-content-center ">
-        
-        ${contactParse.contact.address}, 
-        
-        ${contactParse.contact.city} </div>
-        <div class="row justify-content-center "><strong>Contact :</strong></div>
+            Adresse de livraison :</div>
+            <div class="row justify-content-center ">
+            <strong>${contactParse.contact.address}, 
+        ${contactParse.contact.city}</strong> </div>
+        <div class="row justify-content-center ">Contact :</div>
         <div class="row justify-content-center ">
-        ${contactParse.contact.email} </div>
+        <strong>${contactParse.contact.email}</strong> </div>
         <hr>
             <a
-      role="button"
-      class="btn_panier  text-center text-uppercase "
-      href="./index.html"
-      >Accueil</a
-    >
-        </div>
+      role="button" class="btn_panier  text-center text-uppercase "
+      href="./index.html">Accueil</a>
+    </div>
 </div>
 `;
 

@@ -118,7 +118,7 @@ footer a i:hover {
   color: black;
   color: #7a4774;
   animation: ease-in 0.2s opacity;
-  animation: ease-in 0.2s grow;
+  animation: ease-out 0.2s grow;
   transform: scale(1.2);
 }
 
@@ -216,14 +216,10 @@ footer a i:hover {
 .Box img {
   width: 100%;
   object-fit: cover;
-  height: 300px;
-
-  border-radius: 20px 20px 0px 0px;
+  height: 250px;
 }
 
 .img_panier {
-  border: 2px solid #00000060;
-
   object-fit: cover;
   width: 150px;
 }
@@ -245,7 +241,7 @@ footer a i:hover {
 .box_panier {
   display: flex;
   height: fit-content;
-  grid-gap: 50px;
+  grid-gap: 15%;
 }
 
 .btn_panier {
@@ -439,6 +435,14 @@ footer a i:hover {
   display: none;
 }
 
+.panier_vide {
+  text-align: center;
+}
+
+.titre_panier {
+  text-align: center;
+}
+
 .confirmation_produit a:hover {
   background: #f3e9f1;
   color: black;
@@ -454,6 +458,13 @@ footer a i:hover {
   top: 100px;
   position: relative;
   animation: ease-out 0.4s btn_send;
+}
+
+.box_panier_entier img {
+  height: 100px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 2px solid #00000060;
 }
 
 .btn_panier_vide {

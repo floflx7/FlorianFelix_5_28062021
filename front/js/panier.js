@@ -1,6 +1,6 @@
 // Récupération des produits choisis
 let productBasket = JSON.parse(localStorage.getItem("achatProduit"));
-
+let nombreProduct = JSON.parse(localStorage.getItem("longeur"));
 // Création du tableau products
 let products = [];
 
@@ -9,10 +9,16 @@ const h2Name = document.createElement("h2");
 const emptyBasket = document.getElementById("emptyBasket");
 
 // Création d'une condition, panier vide ou création du panier
-if (productBasket < 1) {
-} else {
-  emptyBasket.classList.add("d-none");
+if (nombreProduct >= 1) {
   constructionPanier();
+} else {
+  const titre_panier = document.querySelector(".titre_panier");
+  document.querySelector(".box_panier_entier").innerHTML = `
+  <div class="panier_vide">
+  <h1 class="align-items-center">Votre panier est vide <i class="fas fa-times"></i></h1>
+  <a role="button"class="btn_panier text-center text-uppercase "
+  href="index.html">ACCUEIL</a></div>`;
+  titre_panier.style.display = "none";
 }
 
 // Création du panier
@@ -77,7 +83,7 @@ function constructionPanier() {
   confirmViderPanier.addEventListener("click", function (event) {
     event.preventDefault();
     localStorage.clear();
-    window.location.href = "panier.html";
+    window.location.href = "index.html";
   });
 
   // Affichage du formulaire de commande
