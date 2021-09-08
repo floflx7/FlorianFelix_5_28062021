@@ -5,10 +5,6 @@ let nombreProduct = JSON.parse(localStorage.getItem("nombreProduits"));
 // Création du tableau products
 let products = [];
 
-const productName = document.getElementById("titrePage");
-const h2Name = document.createElement("h2");
-const emptyBasket = document.getElementById("emptyBasket");
-
 // Création d'une condition, si un produit ou plus dans le tableau déclencher productToBasket sinon afficher panier vide
 if (nombreProduct != null) {
   constructionPanier();
@@ -46,7 +42,7 @@ function constructionPanier() {
     i++;
     // Création de productTotal (prix total)
     productTotal = productTotal + productItem.productPrice;
-  // id de produit récupérer et envoi vers le tableau products
+    // id de produit récupérer et envoi vers le tableau products
     products.push(productItem.productId);
   });
 
