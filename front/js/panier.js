@@ -20,10 +20,8 @@ if (nombreProduct != null) {
 
 // Création du panier
 function constructionPanier() {
-  i = 0;
   productTotal = 0;
   const productBasketItem = document.getElementById("productBasketList");
-
   // Pour chaques produits afficher:
   productBasket.forEach((productItem) => {
     const divProductItem = document.createElement("div");
@@ -39,7 +37,7 @@ function constructionPanier() {
 
     divProductItem.innerHTML = productBasketItemContent;
     productBasketItem.appendChild(divProductItem);
-    i++;
+
     // Création de productTotal (prix total)
     productTotal = productTotal + productItem.productPrice;
     // id de produit récupérer et envoi vers le tableau products
@@ -58,7 +56,6 @@ function constructionPanier() {
 
   //Affichage bouton vider panier
   const divProductBasketButtons = document.createElement("div");
-  divProductBasketButtons.setAttribute("id", ConfirmDeleteBasket);
   const productBasketButtonContent = `
         <div class="boutons_panier">
 <a href="#" class="btn_panier" id="validerAchat">Passer la commande</a>
@@ -126,11 +123,11 @@ function constructionPanier() {
 
     //Vérification des champs du formulaire avec regex
     if (
-      regexFirstName.test(contact.firstName) == true &&
-      regexLastName.test(contact.lastName) == true &&
-      regexCity.test(contact.city) == true &&
-      regexAddress.test(contact.address) == true &&
-      regexMail.test(contact.email) == true
+      (regexFirstName.test(contact.firstName) == true) &
+      (regexLastName.test(contact.lastName) == true) &
+      (regexCity.test(contact.city) == true) &
+      (regexAddress.test(contact.address) == true) &
+      (regexMail.test(contact.email) == true)
     ) {
       // Création objet result regroupant contact et products id
       let result = { contact, products };
