@@ -153,7 +153,7 @@ function constructionPanier() {
             contact: contact,
           };
 
-          //Envoi de productTotal et des objets numeroCommande, dans le local storage
+          //Envoi de productTotal et des objets numeroCommande et contact dans le local storage
           localStorage.setItem(
             "numeroCommande",
             JSON.stringify(numeroCommande)
@@ -172,9 +172,8 @@ function constructionPanier() {
         .catch((error) => {
           console.error("error", error);
         });
-      //Si le formulaire n'est pas correctement rempli affichage d'une alert
+      //Si le formulaire n'est pas correctement rempli, affichage d'une alert
     } else {
-      console.log(contact);
       alert("Veuillez correctement remplir le formulaire");
       return false;
     }
