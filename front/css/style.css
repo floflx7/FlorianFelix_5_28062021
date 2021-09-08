@@ -362,6 +362,7 @@ footer a i:hover {
   40% {
     opacity: 0%;
   }
+
   100% {
     opacity: 100%;
     transform: translateX(0px);
@@ -384,6 +385,7 @@ footer a i:hover {
   border-radius: 10px;
   transition: ease-in 0.5s all;
 }
+
 .fermerFormulaire:hover {
   background: #f3e9f1;
   color: black;
@@ -495,6 +497,7 @@ a .btn_panier_vide:hover {
     transform: translatey(0);
   }
 }
+
 .box:hover {
   animation: 0.5s ease-out box_anim;
   transform: scale(1.05);
@@ -523,6 +526,7 @@ a .btn_panier_vide:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
 .menu {
   float: right;
   margin-right: 10%;
