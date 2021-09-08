@@ -13,7 +13,6 @@ fetch("http://localhost:3000/api/furniture/" + id)
 
 //Création de box avec le produit choisi
 function BoxProduct(productPicked) {
-  const productBox = document.getElementById("productBox");
   const divBox = document.createElement("div");
   divBox.innerHTML = `
     <div class="Box">
@@ -21,22 +20,20 @@ function BoxProduct(productPicked) {
       <img src="${productPicked.imageUrl}" alt="${productPicked.name}"
       <div class="product_description">
         <p div class="description">${productPicked.description}</p>
-            <form id="AddToBasket">
-              <div class="prix">
+            <div class="prix">
               <select class="form-control-sm col-5 p-0" id="productVarnish" required>
               </select>
                   <p class="col-sm"><strong>${
                     productPicked.price / 100
                   } €</strong></p>  
                     </div>
-                    <button class="btn_panier" type="submit" name="add"  id="ok" >Ajouter au panier</button>
+                    <button class="btn_panier" type="submit" name="add"  id="boutonAchat" >Ajouter au panier</button>
                     <div class="confirmation_produit">
                     <p>produit ajouté au panier</p>
                     <a href="index.html" id="index">accueil</a>
                     <a href="panier.html" id="panier">panier</a>
                 </div>
-            </form>
-          </div>
+            </div>
       </div>`;
   productBox.appendChild(divBox);
 }
@@ -51,7 +48,7 @@ function addVarnishs(productPicked) {
 
 //fonction qui permet d'envoyer l'object du produit vers le panier
 function addProductToBasketAndRedirect(productPicked) {
-  const button_product = document.getElementById("ok");
+  const button_product = document.getElementById("boutonAchat");
   button_product.addEventListener("click", function (event) {
     event.preventDefault();
     productObj = {
@@ -69,7 +66,7 @@ function addProductToBasketAndRedirect(productPicked) {
 
 //fonction qui permet l'affichage du boutton vers panier ou accueil
 function confirmation() {
-  const button_product = document.getElementById("ok");
+  const button_product = document.getElementById("boutonAchat");
   const confirmationProduit = document.querySelector(".confirmation_produit");
   button_product.style.display = "none";
   confirmationProduit.style.display = "block";

@@ -538,12 +538,13 @@ a .btn_panier_vide:hover {
 }
 
 .prix {
+  padding: 20px;
   display: flex;
-  grid-gap: 100px;
+  grid-gap: 50px;
 }
 
 .prix p {
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 @media only screen and (max-width: 1280px) {
