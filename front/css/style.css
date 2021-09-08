@@ -537,6 +537,15 @@ a .btn_panier_vide:hover {
   border-radius: 20px 20px 0px 0px;
 }
 
+.prix {
+  display: flex;
+  grid-gap: 100px;
+}
+
+.prix p {
+  margin-top: 5px;
+}
+
 @media only screen and (max-width: 1280px) {
   #products_list {
     grid-template-columns: auto auto;
@@ -558,5 +567,69 @@ a .btn_panier_vide:hover {
   .form-group {
     display: grid;
     grid-template-columns: auto auto;
+  }
+
+  .box_panier {
+    display: grid;
+    grid-template-columns: auto;
+    height: fit-content;
+    grid-gap: 5%;
+  }
+
+  .boutons_panier {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: auto;
+  }
+
+  .Box {
+    box-shadow: none;
+    border-radius: 0px;
+
+    width: 100%;
+
+    z-index: 0;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    text-align: center;
+    position: relative;
+    margin: 0;
+    top: 0;
+    left: 0;
+    padding-bottom: 120px;
+    margin-right: 0;
+    transform: none;
+  }
+
+  .Box_conf {
+    box-shadow: none;
+    border-radius: 0px;
+    width: 100%;
+  }
+
+  nav a img {
+    width: 150px;
+    margin-top: 15px;
+  }
+
+  .box_panier_entier {
+    box-shadow: none;
+    padding: 20px;
+    border-radius: 20px;
+    top: 0px;
+    position: relative;
+    animation: ease-out 0.4s btn_send;
+  }
+
+  .box {
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.603);
+    border-radius: 20px 20px 20px 20px;
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    min-width: 200px;
+    transition: ease-out 0.5s all;
+    padding-bottom: 20px;
+    margin-top: 20px;
   }
 }

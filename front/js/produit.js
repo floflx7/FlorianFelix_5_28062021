@@ -8,7 +8,7 @@ fetch("http://localhost:3000/api/furniture/" + id)
   .then((productPicked) => {
     BoxProduct(productPicked);
     addProductToBasketAndRedirect(productPicked);
-    varnishProductOptions(productPicked);
+    addVarnishs(productPicked);
   });
 
 //Création de box avec le produit choisi
@@ -16,42 +16,37 @@ function BoxProduct(productPicked) {
   const productBox = document.getElementById("productBox");
   const divBox = document.createElement("div");
   divBox.innerHTML = `
-          <div class="Box">
-        <img src="${productPicked.imageUrl}" alt="${productPicked.name}"
+    <div class="Box">
+      <h1>${productPicked.name}</h1>
+      <img src="${productPicked.imageUrl}" alt="${productPicked.name}"
       <div class="product_description">
-        <h2>${productPicked.name}</h2>
-          <p div class="description">${productPicked.description}</p>
+        <p div class="description">${productPicked.description}</p>
             <form id="AddToBasket">
-              <div class="row ">
-                  <select class="form-control-sm col-5 p-0" id="productVarnish" required>
-                    </select>
-                        <p class="col-sm"><strong>${
-                          productPicked.price / 100
-                        } €</strong></p>  
+              <div class="prix">
+              <select class="form-control-sm col-5 p-0" id="productVarnish" required>
+              </select>
+                  <p class="col-sm"><strong>${
+                    productPicked.price / 10
+                  } €</strong></p>  
                     </div>
                     <button class="btn_panier" type="submit" name="add"  id="ok" >Ajouter au panier</button>
                     <div class="confirmation_produit">
                     <p>produit ajouté au panier</p>
                     <a href="index.html" id="index">accueil</a>
                     <a href="panier.html" id="panier">panier</a>
-                    </div>
-                </form>
-                
-            </div>
-        </div>`;
+                </div>
+            </form>
+          </div>
+      </div>`;
   productBox.appendChild(divBox);
 }
 
-//création d'une fonction permettant d'afficher les différents vernis
-function varnishProductOptions(productPicked) {
-  const productVarnishs = productPicked.varnish;
-  const productVarnish = document.getElementById("productVarnish");
-  productVarnishs.forEach((varnish) => {
-    const varnishOption = document.createElement("option");
-    varnishOption.setAttribute("value", varnish);
-    varnishOption.innerHTML = varnish;
-    productVarnish.appendChild(varnishOption);
-  });
+//fonctionqui permet d'afficher les différents vernis
+function addVarnishs(productPicked) {
+  const versionChoice = document.getElementById("productVarnish");
+  for (let varnish of productPicked.varnish) {
+    versionChoice.innerHTML += `<option value="${varnish}">${varnish}</option>`;
+  }
 }
 
 //fonction qui permet d'envoyer l'object du produit vers le panier
@@ -59,7 +54,6 @@ function addProductToBasketAndRedirect(productPicked) {
   const button_product = document.getElementById("ok");
   button_product.addEventListener("click", function (event) {
     event.preventDefault();
-
     productObj = {
       productName: productPicked.name,
       productVarnish: productVarnish.value,
@@ -69,7 +63,6 @@ function addProductToBasketAndRedirect(productPicked) {
       productImageUrl: productPicked.imageUrl,
     };
     confirmation();
-
     ajoutProduit();
   });
 }
@@ -82,6 +75,8 @@ function confirmation() {
   confirmationProduit.style.display = "block";
 }
 
+//Si produit dans productToBasket on appel la fonction envoiPanier
+//sinon on créé le tableau productToBasket et appel envoiPanier
 function ajoutProduit() {
   productToBasket = JSON.parse(localStorage.getItem("achatProduit"));
   if (productToBasket) {
@@ -90,12 +85,12 @@ function ajoutProduit() {
     productToBasket = [];
     envoiPanier();
   }
-  console.log(productToBasket.length);
 }
 
+//Envoi de l'objet product et de nombre produits dans le local storage
 function envoiPanier() {
-  const combien = productToBasket.length;
+  const nombreProduits = productToBasket.length;
   productToBasket.push(productObj);
   localStorage.setItem("achatProduit", JSON.stringify(productToBasket));
-  localStorage.setItem("longeur", JSON.stringify(combien));
+  localStorage.setItem("nombreProduits", JSON.stringify(nombreProduits));
 }

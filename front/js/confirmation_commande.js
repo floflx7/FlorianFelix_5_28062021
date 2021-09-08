@@ -1,21 +1,18 @@
-const numeroCommande = localStorage.getItem("numeroCommande");
+//Récupération des éléments du localStorage
+const numeroCommande = JSON.parse(localStorage.getItem("numeroCommande"));
 const montantCommande = localStorage.getItem("montantCommande");
-const contactCommande = localStorage.getItem("contactCommande");
-const numeroParse = JSON.parse(numeroCommande);
-const contactParse = JSON.parse(contactCommande);
-console.log(numeroCommande);
-console.log(numeroParse.order);
-console.log(contactParse.contact);
+const contactCommande = JSON.parse(localStorage.getItem("contactCommande"));
 const recapitulatifCommande = document.getElementById("recapitulatifCommande");
 const recapDiv = document.createElement("div");
 
+//Affichage de la commande
 recapDiv.innerHTML = `
 <div class="Box_conf">
 <h1 class="text-center">Commande confirmée</h1>
 <i class="far fa-check-circle"></i>
 <div class="row justify-content-center ">
                 Numéro :
-                <strong>${numeroParse.order}</strong></div>
+                <strong>${numeroCommande.order}</strong></div>
             
             <div class="row justify-content-center">
                 Total :
@@ -24,11 +21,11 @@ recapDiv.innerHTML = `
             <div class="row justify-content-center ">
             Adresse de livraison :</div>
             <div class="row justify-content-center ">
-            <strong>${contactParse.contact.address}, 
-        ${contactParse.contact.city}</strong> </div>
+            <strong>${contactCommande.contact.address}, 
+        ${contactCommande.contact.city}</strong> </div>
         <div class="row justify-content-center ">Contact :</div>
         <div class="row justify-content-center ">
-        <strong>${contactParse.contact.email}</strong> </div>
+        <strong>${contactCommande.contact.email}</strong> </div>
         <hr>
             <a
       role="button" class="btn_panier  text-center text-uppercase "

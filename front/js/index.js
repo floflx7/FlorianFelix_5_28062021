@@ -1,26 +1,27 @@
 // appel de l'Api avec fetch
 
 fetch("http://localhost:3000/api/furniture")
-  .then((productsList) => productsList.json())
-  .then((productsList) => {
-    tableauProducts(productsList);
+  .then((product) => product.json())
+  .then((product) => {
+    displayProducts(product);
+    console.log(product);
   });
 
 // Création de la fonction visant à créer des box avec les informations des produits
-function tableauProducts(productsList) {
+function displayProducts(product) {
   const mainProduct = document.getElementById("products_list");
-  productsList.forEach((productList) => {
+  product.forEach((product) => {
     const divProduct = document.createElement("div");
     divProduct.innerHTML = `
     <div class="box">
-        <img src="${productList.imageUrl}" alt="${productList.name}">
-    <h3>${productList.name}</h3>
-              <p><strong>${productList.price / 100} €</strong></p>
-              <p class="product_description">${productList.description}</p>
+        <img src="${product.imageUrl}" alt="${product.name}">
+    <h3>${product.name}</h3>
+              <p><strong>${product.price / 100} €</strong></p>
+              <p class="product_description">${product.description}</p>
               <a
       role="button"
       class="btn_panier text-center text-uppercase "
-      href="produit.html?id=${productList._id}"
+      href="produit.html?id=${product._id}"
       >Acheter</a
     >
             </div>`;

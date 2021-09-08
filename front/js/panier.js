@@ -1,6 +1,7 @@
 // Récupération des produits choisis
 let productBasket = JSON.parse(localStorage.getItem("achatProduit"));
-let nombreProduct = JSON.parse(localStorage.getItem("longeur"));
+let nombreProduct = JSON.parse(localStorage.getItem("nombreProduits"));
+
 // Création du tableau products
 let products = [];
 
@@ -8,8 +9,8 @@ const productName = document.getElementById("titrePage");
 const h2Name = document.createElement("h2");
 const emptyBasket = document.getElementById("emptyBasket");
 
-// Création d'une condition, panier vide ou création du panier
-if (nombreProduct >= 1) {
+// Création d'une condition, si un produit ou plus dans le tableau déclencher productToBasket sinon afficher panier vide
+if (nombreProduct != null) {
   constructionPanier();
 } else {
   const titre_panier = document.querySelector(".titre_panier");
@@ -34,7 +35,7 @@ function constructionPanier() {
               <div class="box_panier d-flex align-items-center ">
             <div class="img_panier"><img src="${productItem.productImageUrl}" alt="${productItem.productName}" class="w-100"></div>
               <div class="">${productItem.productName}</div>
-              <div class="">Vernis:"${productItem.productVarnish}"</div>
+              <div class="">Vernis: "${productItem.productVarnish}"</div>
               <div class=""><strong>${productItem.productPrice} €</strong></div></div>
               <hr>
               
@@ -43,11 +44,9 @@ function constructionPanier() {
     divProductItem.innerHTML = productBasketItemContent;
     productBasketItem.appendChild(divProductItem);
     i++;
-
     // Création de productTotal (prix total)
     productTotal = productTotal + productItem.productPrice;
-
-    // id de produit récupérer et envoi vers le tableau products
+  // id de produit récupérer et envoi vers le tableau products
     products.push(productItem.productId);
   });
 
@@ -137,7 +136,7 @@ function constructionPanier() {
       regexAddress.test(contact.address) == true &&
       regexMail.test(contact.email) == true
     ) {
-      // Création objet {result} regroupant contact et products
+      // Création objet result regroupant contact et products id
       let result = { contact, products };
 
       // Méthode POST
@@ -156,11 +155,12 @@ function constructionPanier() {
             order: response.orderId,
           };
 
-          // Création de l'objet
+          // Création de l'objet contactCommande
           let contactCommande = {
             contact: contact,
           };
 
+          //Envoi de productTotal et des objets numeroCommande, dans le local storage
           localStorage.setItem(
             "numeroCommande",
             JSON.stringify(numeroCommande)
@@ -172,12 +172,14 @@ function constructionPanier() {
 
           localStorage.setItem("montantCommande", productTotal);
 
+          //On vide le local storage
           window.location = "confirmation_commande.html";
           localStorage(clear);
         })
         .catch((error) => {
           console.error("error", error);
         });
+      //Si le formulaire n'est pas correctement rempli affichage d'une alert
     } else {
       console.log(contact);
       alert("Veuillez correctement remplir le formulaire");
