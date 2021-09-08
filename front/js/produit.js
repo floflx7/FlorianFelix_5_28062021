@@ -26,7 +26,7 @@ function BoxProduct(productPicked) {
               <select class="form-control-sm col-5 p-0" id="productVarnish" required>
               </select>
                   <p class="col-sm"><strong>${
-                    productPicked.price / 10
+                    productPicked.price / 100
                   } €</strong></p>  
                     </div>
                     <button class="btn_panier" type="submit" name="add"  id="ok" >Ajouter au panier</button>
