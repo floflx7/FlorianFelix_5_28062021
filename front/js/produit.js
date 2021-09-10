@@ -38,11 +38,11 @@ function BoxProduct(productPicked) {
   productBox.appendChild(divBox);
 }
 
-//fonctionqui permet d'afficher les différents vernis
+//fonction qui permet d'afficher les différents vernis
 function addVarnishs(productPicked) {
-  const versionChoice = document.getElementById("productVarnish");
+  const varnishOption = document.getElementById("productVarnish");
   for (let varnish of productPicked.varnish) {
-    versionChoice.innerHTML += `<option value="${varnish}">${varnish}</option>`;
+    varnishOption.innerHTML += `<option value="${varnish}">${varnish}</option>`;
   }
 }
 
